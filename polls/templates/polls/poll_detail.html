@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="poll-container">
+    <h2>{{ poll.question }}</h2>
+    <p><strong>Created by:</strong> {{ poll.creator.username }}</p>
+    <p><strong>Created at:</strong> {{ poll.created_at|date:"F d, Y H:i" }}</p>
+
+    <!-- Countdown Timer -->
+    <p><strong>Time Remaining:</strong> <span id="countdown"></span></p>
+
+    <!-- Answers and Votes -->
+    <form method="post" action="{% url 'polls:poll_vote' poll.id %}">
+        {% csrf_token %}
+        {% for answer in poll.answers.all %}
+            <label>
+                <input type="radio" name="answer" value="{{ answer.id }}">
+                {{ answer.text }} - <strong>{{ answer.votes.count }}</strong> votes
+            </label><br>
+        {% endfor %}
+        <button type="submit">Vote</button>
+    </form>
+    <br>
+
+    <!-- Share Link -->
+    <button onclick="copyShareLink()">Share Poll</button>
+    <br>
+    <input type="text" id="share-link" value="{{ request.build_absolute_uri }}" readonly style="width: 100%;">
+
+</div><br>
+
+<!-- JavaScript for Countdown Timer & Share Link -->
+ <script>
+    function updateCountdown() {
+      const endTime = new Date("{{ poll.get_end_time|date:'c' }}").getTime();
+      const now = new Date().getTime();
+      const distance = endTime - now;
+
+      if (distance < 0) {
+        document.getElementById("countdown").innerHTML = "Poll has ended";
+      } else {
+        const minutes = Math.floor(distance / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        document.getElementById("countdown").innerHTML = minutes + "m " + seconds + "s ";
+        setTimeout(updateCountdown, 1000);
+      }
+    }
+    updateCountdown();
+  </script>
+
+
+{% endblock %}

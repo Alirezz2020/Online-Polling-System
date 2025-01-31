@@ -1,0 +1,70 @@
+
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Your Polls</h1><br>
+  <a href="{% url 'polls:poll_create' %}" class="btn btn-primary">Create New Poll</a>
+  <ul><br>
+    {% for poll in polls %}
+      <li>
+        <h3>
+          <a href="{% url 'polls:poll_detail' poll.pk %}">{{ poll.question }}</a>
+             (<a href="{% url 'polls:poll_update' poll.pk %}">Edit</a> |
+         <a href="{% url 'polls:poll_delete' poll.pk %}">Delete</a>)
+        </h3>
+        <p>
+          Created at: {{ poll.created_at }}
+         <!-- Countdown Timer -->
+    <p><strong>Time Remaining:</strong> <span id="countdown-{{ poll.id }}">Loading...></span></p>
+        </p>
+        <ul>
+          {% for answer in poll.answers.all %}
+            <li>
+              {{ answer.text }}: {{ answer.votes.count }} vote{{ answer.votes.count|pluralize }}
+            </li>
+          {% endfor %}
+            <hr>
+        </ul>
+      </li>
+    {% empty %}
+      <li>You haven't created any polls yet.</li>
+    {% endfor %}
+  </ul>
+
+
+
+<script>
+  function updateCountdown(pollId, endTime) {
+    if (!endTime) {
+      document.getElementById("countdown-" + pollId).innerText = "No End Time Set";
+      return;
+    }
+
+    const end = new Date(endTime).getTime();
+
+    function update() {
+      const now = new Date().getTime();
+      const distance = end - now;
+
+      if (isNaN(distance) || distance <= 0) {
+        document.getElementById("countdown-" + pollId).innerText = "Expired";
+      } else {
+        const minutes = Math.floor(distance / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        document.getElementById("countdown-" + pollId).innerText = minutes + "m " + seconds + "s";
+        setTimeout(update, 1000);
+      }
+    }
+    update();
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    {% for poll in polls %}
+      updateCountdown("{{ poll.id }}", "{{ poll.get_end_time|date:'c' }}");
+    {% endfor %}
+  });
+</script>
+
+
+{% endblock %}
+
+

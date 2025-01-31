@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Vote on: {{ poll.question }}</h1>
+  <form method="post" action="">
+    {% csrf_token %}
+    {% for answer in poll.answers.all %}
+      <div>
+        <input type="radio" name="answer" id="answer{{ answer.id }}" value="{{ answer.id }}">
+        <label for="answer{{ answer.id }}">{{ answer.text }}</label>
+      </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-success">Submit Vote</button>
+  </form>
+{% endblock %}

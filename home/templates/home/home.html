@@ -1,12 +1,15 @@
+
+
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Vote{% endblock %}
-
 {% block content %}
 
- <h1>Welcome Home</h1>
 
-    <a href="{% url 'polls:poll_create' %}"><button>Create Poll</button></a>
-
+    <div class="home-container">
+        <h1>Welcome to the Online Polling System!</h1>
+        <p>Create, share, and vote on polls easily.</p>
+      <a href="{% url 'polls:poll_create' %}" class="btn btn-primary">Create Poll</a>
+    </div>
 {% endblock %}
+

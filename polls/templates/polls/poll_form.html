@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>{% if object %}Edit Poll{% else %}Create Poll{% endif %}</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <h3>Answers</h3>
+    {{ answers.management_form }}
+    {% for form in answers %}
+      {{ form.as_p }}
+    {% endfor %}
+    <button type="submit" class="btn btn-success">Save</button>
+  </form>
+{% endblock %}
