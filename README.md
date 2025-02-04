@@ -24,19 +24,24 @@ An interactive online polling system that allows users to create, vote on, and m
    git clone https://github.com/your-username/Online-Polling-System.git
    cd Online-Polling-System
 2 **Create a Virtual Environment**
+```sh
   python -m venv venv
   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 
 3 **Install Dependencies**
+```sh
   pip install -r requirements.txt
 
 4 **Apply Migrations**
+```sh
   python manage.py migrate
   
 5 **Create a Superuser (Optional for Admin Access)**
+```sh
   python manage.py createsuperuser
   
 6 **Run the Development Server**
+```sh
   python manage.py runserver
 
 7**Access the App**
