@@ -23,7 +23,7 @@ An interactive online polling system that allows users to create, vote on, and m
    ```sh
    git clone https://github.com/alirezz2020/Online-Polling-System.git
    cd Online-Polling-System
-2 **Create a Virtual Environment**
+2. **Create a Virtual Environment**
 ```sh
   python -m venv venv
   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
