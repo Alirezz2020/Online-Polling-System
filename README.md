@@ -28,29 +28,4 @@ An interactive online polling system that allows users to create, vote on, and m
   python -m venv venv
   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 
-3. **Install Dependencies**
 
-  pip install -r requirements.txt
-
-4. **Apply Migrations**
-
-  python manage.py migrate
-  
-5. **Create a Superuser (Optional for Admin Access)**
-
-  python manage.py createsuperuser
-  
-6. **Run the Development Server**
-
-  python manage.py runserver
-
-7**Access the App**
-  Open http://127.0.0.1:8000/ in your browser.
-
-
-  🤝 Contributing
-    Feel free to fork this repository, open issues, and submit pull requests!
-
-
-   📜 License
-      This project is licensed under the MIT License.
