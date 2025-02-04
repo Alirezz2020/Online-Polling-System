@@ -40,6 +40,13 @@ An interactive online polling system that allows users to create, vote on, and m
 6. Run the Development Server
    python manage.py runserver
 
+
+
+🤝 Contributing
+    I'm not a frontend guy, so the UI is minimal. The focus is on backend functionality. Feel free to improve the design! 😅
+
+📜 License
+   This project is licensed under the MIT License.
 7. Access the App : Open http://127.0.0.1:8000/ in your browser.
 
    
